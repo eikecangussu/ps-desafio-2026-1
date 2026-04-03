@@ -21,7 +21,7 @@ class CategoryController extends Controller
      */
     public function index(): JsonResponse
     {
-        $categories = $this->category->all();
+        $categories = $this->category->with('articles')->get();
         return response()->json($categories, Response::HTTP_OK);
     }
 
@@ -58,7 +58,7 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category, $id) : JsonResponse
+    public function destroy($id) : JsonResponse
     {
         $category = $this->category->findOrFail($id);
         $category->delete();
