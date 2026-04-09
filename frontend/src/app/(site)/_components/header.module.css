@@ -1,0 +1,60 @@
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background-color: rgb(243, 243, 243);
+    border-bottom: 1px solid rgb(26, 44, 76);
+    box-shadow: 0 0 10px black;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2px 20px;
+}
+
+.headerLinks {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 20px;
+}
+
+.headerLink {
+    font-family: 'Italian Plate No2', sans-serif;
+    text-decoration: none;
+    color: black;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.headerLink:hover {
+    color: rgb(26, 44, 76);
+    scale: 1.05;
+    transition: all 0.3s ease-in-out;
+    border-bottom: 2px solid rgb(26, 44, 76);
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 10px 20px;
+        gap: 10px;
+    }
+
+    .headerLogo {
+        order: -1;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .headerLinks {
+        justify-content: center;
+        gap: 15px;
+    }
+}

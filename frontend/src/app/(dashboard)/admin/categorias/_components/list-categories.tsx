@@ -1,3 +1,4 @@
+'use client'
 import { DashboardContainer } from '@/components/dashboard/dashboard-items'
 import {
   Table,
@@ -9,18 +10,40 @@ import {
   TableRow,
 } from '@/components/dashboard/table'
 
-import { categoryType } from '@/types/category'
+import { CategoryType } from '@/types/category'
 import { Button } from '@/components/button'
-import { LuInfo, LuPen, LuPlusCircle, LuTrash } from 'react-icons/lu'
+import { LuInfo, LuPen, LuPlus, LuTrash } from 'react-icons/lu'
 import { DialogUpdateCategory } from './dialog-update-category'
 import { DialogCategoryDelete } from './dialog-delete-category'
 import { DialogInformationCategory } from './dialog-information-category'
 import { DialogCreateCategory } from './dialog-create-category'
+import { useEffect, useState } from 'react'
+import { api } from '@/services/api'
 
-export default async function ListCategory() {
-  const { response } = null // requisicao para api
+export default function ListCategory() {
+  const [categories, setCategories] = useState<CategoryType[]>([])
 
-  if (!response) {
+  useEffect(() => {
+    async function getCategories() {
+      const { response, error } = await api('GET', '/category')
+      if (response) {
+        setCategories(response as CategoryType[])
+      } else {
+        console.error(error?.message)
+      }
+    }
+    getCategories()
+  }, [])
+
+  console.log(categories)
+  console.log('Checando os componentes:', {
+    DashboardContainer,
+    Table,
+    Button,
+    DialogCreateCategory,
+    DialogInformationCategory,
+  })
+  if (!categories) {
     return (
       <DashboardContainer className="text-destructive">
         Não foi possível obter as categorias.
@@ -28,14 +51,12 @@ export default async function ListCategory() {
     )
   }
 
-  const categories: categoryType[] = response
-
   return (
     <>
       <DashboardContainer className="flex h-min justify-between space-x-0 gap-y-2.5 max-sm:flex-col">
         <DialogCreateCategory>
           <Button size="sm">
-            <LuPlusCircle />
+            <LuPlus />
             Nova categoria
           </Button>
         </DialogCreateCategory>
@@ -49,7 +70,7 @@ export default async function ListCategory() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {categories?.map((category: categoryType) => (
+            {categories?.map((category: CategoryType) => (
               <TableRow key={category.id}>
                 <TableCell>{category.name}</TableCell>
                 <TableCell className="flex justify-end gap-2">

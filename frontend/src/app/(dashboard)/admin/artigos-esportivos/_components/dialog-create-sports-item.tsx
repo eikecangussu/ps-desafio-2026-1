@@ -19,6 +19,7 @@ interface DialogCreateSportsItemProps {
   children: React.ReactNode
 }
 
+// eslint-disable-next-line prettier/prettier
 export function DialogCreateSportsItem({ children }: DialogCreateSportsItemProps) {
   const [open, setOpen] = useState<boolean>()
   const [error, setError] = useState<ResponseErrorType | null>(null)

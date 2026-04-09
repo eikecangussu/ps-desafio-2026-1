@@ -45,4 +45,12 @@
     body {
         @apply bg-background text-foreground;
     }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    [id] {
+        scroll-margin-top: 110px;
+    }
 }

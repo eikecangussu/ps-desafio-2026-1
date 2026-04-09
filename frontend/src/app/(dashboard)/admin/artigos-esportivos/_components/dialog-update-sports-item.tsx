@@ -13,23 +13,29 @@ import { updateSportsItem } from '@/actions/sportsItem'
 import { filterFormData } from '@/services/filter-form-data'
 import { useEffect, useState } from 'react'
 import { useToast } from '@/components/use-toast'
-import { sportsItemType } from '@/types/sportsItem'
 import { ResponseErrorType, api } from '@/services/api'
+import { articleType } from '@/types/article'
 
 interface DialogUpdateSportsItemProps {
   id: string
   children: React.ReactNode
 }
 
-export function DialogUpdateSportsItem({ id, children }: DialogUpdateSportsItemProps) {
-  const [sportsItem, setSportsItem] = useState<sportsItemType | null>(null)
+export function DialogUpdateSportsItem({
+  id,
+  children,
+}: DialogUpdateSportsItemProps) {
+  const [sportsItem, setSportsItem] = useState<articleType | null>(null)
   const [open, setOpen] = useState<boolean>()
   const [error, setError] = useState<ResponseErrorType | null>(null)
   const { toast } = useToast()
 
   useEffect(() => {
+    if (!open) return
+    setSportsItem(null)
+
     const requestData = async () => {
-      const { response } = await api<sportsItemType>('GET', `/sports-items/${id}`)
+      const { response } = await api<articleType>('GET', `/articles/${id}`)
 
       if (response) {
         setSportsItem(response)
@@ -53,7 +59,7 @@ export function DialogUpdateSportsItem({ id, children }: DialogUpdateSportsItemP
   const submit = async (form: FormData) => {
     const newForm = await filterFormData(form)
 
-    const { error } = null 
+    const { error } = await JSON.parse(await updateSportsItem(newForm))
 
     if (error) {
       setError(error)
@@ -80,7 +86,7 @@ export function DialogUpdateSportsItem({ id, children }: DialogUpdateSportsItemP
           </DialogDescription>
         </DialogHeader>
         <form action={submit}>
-          <FormFieldsSportsItem error={error} sportsItem={sportsItem} />
+          <FormFieldsSportsItem error={error} article={sportsItem} />
         </form>
       </DialogContent>
     </Dialog>

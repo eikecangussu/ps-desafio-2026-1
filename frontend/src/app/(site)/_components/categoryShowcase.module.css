@@ -1,0 +1,59 @@
+.showcaseSection {
+    padding: 60px 20px;
+    max-width: 1280px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+/* Container do botão triplo */
+.toggleContainer {
+    display: inline-flex;
+    background-color: #f0f0f0;
+    border-radius: 50px;
+    padding: 5px;
+    margin-bottom: 40px;
+}
+
+/* Estilo base dos botões */
+.toggleBtn {
+    padding: 10px 24px;
+    border: none;
+    background: transparent;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Quando o botão está ativo */
+.toggleBtn.active {
+    background-color: rgb(26, 44, 76);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(26, 44, 76 0.4);
+}
+
+.carouselContainer {
+    width: 100%;
+    padding: 20px 10px;
+}
+
+.swiperContainer {
+    /* Dá o espaço necessário para o card crescer */
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+
+    /* Compensa o padding para não empurrar o layout para baixo */
+    margin-top: -40px;
+
+    /* Permite que o card "escape" da caixa ao crescer */
+    overflow: visible !important;
+}

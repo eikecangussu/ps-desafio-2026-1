@@ -1,0 +1,14 @@
+.promoBar {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 8px 10px;
+    font-size: 0.85rem;
+    font-weight: 400;
+    width: 100%;
+    z-index: 100;
+}
+
+.promoBar p {
+    margin: 0;
+}

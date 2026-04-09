@@ -19,7 +19,10 @@ interface DialogCreateSportsItemProps {
   children: React.ReactNode
 }
 
-export function DialogSportsItemDelete({ id, children }: DialogCreateSportsItemProps) {
+export function DialogSportsItemDelete({
+  id,
+  children,
+}: DialogCreateSportsItemProps) {
   const [open, setOpen] = useState<boolean>()
   const { toast } = useToast()
 
@@ -47,8 +50,8 @@ export function DialogSportsItemDelete({ id, children }: DialogCreateSportsItemP
           <DialogTitle>Confirmar exclusão do artigo esportivo</DialogTitle>
           <DialogDescription>
             Tem certeza de que deseja excluir este artigo esportivo? Esta ação é
-            irreversível e removerá permanentemente o artigo esportivo do sistema. Deseja
-            continuar com a exclusão?
+            irreversível e removerá permanentemente o artigo esportivo do
+            sistema. Deseja continuar com a exclusão?
           </DialogDescription>
         </DialogHeader>
         <form action={submit}>
