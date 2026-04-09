@@ -17,13 +17,15 @@ Route::middleware(['auth:sanctum'])->group(function () {
 Route::middleware(['auth:sanctum', 'can:admin'])->group(function () {
     Route::apiResource('/users', UserController::class);
     Route::apiResource('/category',CategoryController::class)->except(['index','show']);
-    Route::apiResource('/articles',ArticlesController::class)->except(['index','show']);
+    Route::apiResource('/articles',ArticlesController::class)->except(['index','show', 'purchase']);
 });
 
 Route::get('/category',[CategoryController::class, 'index']);
 Route::get('/category/{id}',[CategoryController::class, 'show']);
 Route::get('/articles',[ArticlesController::class, 'index']);
 Route::get('/articles/{id}',[ArticlesController::class, 'show']);
+Route::post('/articles/{id}/purchase',[ArticlesController::class, 'purchase']);
+
 
 Route::get('/', function () {
     return ['Laravel' => app()->version()];

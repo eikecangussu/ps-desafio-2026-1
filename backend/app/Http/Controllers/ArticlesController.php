@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PurchaseRequest;
 use App\Models\Articles;
 use App\Http\Requests\StoreArticlesRequest;
 use App\Http\Requests\UpdateArticlesRequest;
@@ -93,27 +92,29 @@ class ArticlesController extends Controller
         return response()->json(['Artigo deletado com sucesso']);
     }
 
-    public function purchase(PurchaseRequest $request, $id) : JsonResponse
+    public function purchase($id) : JsonResponse
     {
-        $quantityToBuy = $request->input('quantity');
         DB::beginTransaction();
         try {
             $article = $this->article->findOrFail($id);
-            if ($article->amount < $quantityToBuy) {
+
+            if ($article->amount <= 0) {
                 DB::rollBack();
                 return response()->json([
-                    'message' => 'Estoque insuficiente para a quantidade solicitada.'
-                ],400); 
+                    'message' => 'Estoque esgotado.'
+                ], 400); 
             }
-            $article->amount -= $quantityToBuy;
+
+            $article->amount -= 1;
             $article->save();
             DB::commit();
-            return response()->json([$article, $quantityToBuy, Response::HTTP_OK]);
-        } catch (Throwable) {
+            return response()->json([$article, 200]);
+
+        } catch (Throwable $e) {
             DB::rollBack();
             return response()->json([
                 'message' => 'Erro ao processar a compra.'
-            ],500);
+            ], 500);
         }
     }
 }
