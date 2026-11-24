@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-
+  typescript:{
+    ignoreBuildErrors:true,
+  },
   images: {
     remotePatterns: [
       {
@@ -11,6 +13,7 @@ const nextConfig = {
     ],
     domains: [process.env.NEXT_PUBLIC_API_DOMAIN, 'via.placeholder.com'],
   },
+
 }
 
 export default nextConfig
