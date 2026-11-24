@@ -5,11 +5,7 @@ import CategoryShowcase from './_components/categoryShowcase'
 import Header from './_components/Header'
 import PromoBar from './_components/PromoBar'
 
-export default async function Home({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default async function Home() {
   return (
     <div>
       <PromoBar />
